@@ -1,0 +1,29 @@
+{
+  "name": "pw-training-dhivya",
+  "version": "1.0.0",
+  "description": "Your repo for the Playwright and TypeScript training program.",
+  "main": "index.js",
+  "dependencies": {
+    "fsevents": "^2.3.2",
+    "playwright": "^1.62.1",
+    "playwright-core": "^1.62.1",
+    "undici-types": "^8.3.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.1.2"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/looplit/pw-training-dhivya.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/looplit/pw-training-dhivya/issues"
+  },
+  "homepage": "https://github.com/looplit/pw-training-dhivya#readme"
+}
