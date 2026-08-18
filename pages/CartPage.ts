@@ -16,10 +16,6 @@ export class CartPage extends BasePage {
         return this.page.getByTestId("inventory-item").filter({ hasText: productName });
     }
 
-    async addToCart(productName: string) {
-        await this.card(productName).getByRole('button', { name: 'Add to cart' }).click();
-    }
-
     async removeFromCart(productName: string) {
         await this.card(productName).getByRole('button', { name: 'Remove' }).click();
     }
@@ -28,8 +24,7 @@ export class CartPage extends BasePage {
         if((await this.cartBadge.count()) === 0) return 0;
         return Number(await this.cartBadge.textContent());
     }
-    async itemNames(): Promise<string[]> {
-     return await this.page
-     .locator(".inventory_item_name").allTextContents();
-    }
+    itemNames(): Locator {
+  return this.page.getByTestId('inventory-item-name');
+}
 }

@@ -1,6 +1,8 @@
-import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
-import { CartPage } from '../pages/CartPage';
+import { test, expect } from '../fixtures.ts';
+import { LoginPage } from '../pages/LoginPage.ts';
+import { CartPage } from '../pages/CartPage.ts';
+import { InventoryPage } from '../pages/InventoryPage.ts';
+
 
 test ("Add products and remove from cart", async ({ page }) => {
     const loginPage = new LoginPage(page);
@@ -10,15 +12,16 @@ test ("Add products and remove from cart", async ({ page }) => {
     const cartPage = new CartPage(page);
 
     // Add products to the cart
-    await cartPage.addToCart('Sauce Labs Bolt T-Shirt');
-    await cartPage.addToCart('Sauce Labs Fleece Jacket');
+    const inventoryPage = new InventoryPage(page);
+    await inventoryPage.addToCart('Sauce Labs Bolt T-Shirt');
+    await inventoryPage.addToCart('Sauce Labs Fleece Jacket');
     expect(await cartPage.getCartCount()).toBe(2);
     console.log("Cart count after adding products: ", await cartPage.getCartCount());
     await cartPage.open();
    const itemNames = await cartPage.itemNames();
     console.log("Items in cart:", itemNames);
-    expect(itemNames).toContain('Sauce Labs Bolt T-Shirt');
-    expect(itemNames).toContain('Sauce Labs Fleece Jacket');
+    expect(itemNames).toContainText(['Sauce Labs Bolt T-Shirt']);
+    expect(itemNames).toContainText(['Sauce Labs Fleece Jacket']);
 
     // Remove a product from the cart
     await cartPage.removeFromCart('Sauce Labs Bolt T-Shirt');
@@ -27,6 +30,15 @@ test ("Add products and remove from cart", async ({ page }) => {
     
     const itemNamesAfterRemoval = await cartPage.itemNames();
     console.log("Items in cart after removal:", itemNamesAfterRemoval);
-    expect(itemNamesAfterRemoval).not.toContain('Sauce Labs Bolt T-Shirt');
-    expect(itemNamesAfterRemoval).toContain('Sauce Labs Fleece Jacket');
+    expect(itemNamesAfterRemoval).not.toContainText(['Sauce Labs Bolt T-Shirt']);
+    expect(itemNamesAfterRemoval).toContainText(['Sauce Labs Fleece Jacket']);
+});
+
+test('Add and remove product - using fixture', async ({ cartPage }) => {
+  await expect(cartPage.itemNames()).toContainText([
+    'Sauce Labs Bolt T-Shirt',
+    'Sauce Labs Fleece Jacket',
+  ]);
+  await cartPage.removeFromCart('Sauce Labs Bolt T-Shirt');
+  await expect(cartPage.itemNames()).toContainText(['Sauce Labs Fleece Jacket']);
 });
