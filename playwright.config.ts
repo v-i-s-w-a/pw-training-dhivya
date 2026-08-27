@@ -43,12 +43,15 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'], storageState: '.auth/user.json'  },
+      testIgnore: /problemuser\.spec\.ts/,
       dependencies: ['setup'],
     },
     {
       name: 'chromium-problem-user',
       use: { ...devices['Desktop Chrome'], storageState: '.auth/problem_user.json'  },
+      //testIgnore: /problemuser\.spec\.ts/,
       dependencies: ['setup'],
+      testMatch: /problemuser\.spec\.ts/,
     },
     // {
     //   name: 'firefox',
