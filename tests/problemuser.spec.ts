@@ -3,7 +3,7 @@ import { LoginPage } from '../pages/LoginPage.ts';
 import { CartPage } from '../pages/CartPage.ts';
 import { InventoryPage } from '../pages/InventoryPage.ts';
 
-test.only('problem user sees the same image for all products', async ({ page }) => {
+test('problem user sees the same image for all products', async ({ page }) => {
   await page.goto('/inventory.html');
 
   const imageSources = await page
