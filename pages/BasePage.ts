@@ -7,6 +7,6 @@ export class BasePage {
   ) {}
 
     async open() {
-        await this.page.goto(`https://www.saucedemo.com${this.path}`);
+        await this.page.goto(this.path);
     }
 }
