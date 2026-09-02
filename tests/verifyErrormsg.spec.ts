@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('verify error message for locked out user', async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
-  await expect(page).toHaveTitle('Title');
+  await expect(page).toHaveTitle('Swag Labs');
   await expect(page).toHaveURL('https://www.saucedemo.com/');
   await page
     .getByPlaceholder('Username')
