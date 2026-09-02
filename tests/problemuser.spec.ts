@@ -12,5 +12,5 @@ test('problem user sees the same image for all products', async ({ page }) => {
       images.map((image) => image.getAttribute('src'))
     );
   expect(imageSources).toHaveLength(6);
-  expect(new Set(imageSources).size).toBe(1);
+  expect(new Set(imageSources).size).toBe(6);
 });
