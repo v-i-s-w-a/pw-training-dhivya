@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import process from 'process';
 
 /**
  * Read environment variables from file.
@@ -53,15 +54,18 @@ export default defineConfig({
       dependencies: ['setup'],
       testMatch: /problemuser\.spec\.ts/,
     },
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'], storageState: '.auth/user.json'  },
+      testIgnore: /problemuser\.spec\.ts/,
+      dependencies: ['setup'],
+    },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'], storageState: '.auth/user.json'  },
+      testIgnore: /problemuser\.spec\.ts/,
+      dependencies: ['setup'],
+    },
 
     /* Test against mobile viewports. */
     // {
